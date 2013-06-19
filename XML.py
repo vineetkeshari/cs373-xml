@@ -2,16 +2,22 @@
 
 from xml.etree import ElementTree as ET
 
+debug = False
+verbose = False
+
 def read_input (r) :
     xml = ''
-    read = r.readline()
-    while not read == '' :
-        xml = xml + read
+    while True :
         read = r.readline()
+        if read == '' :
+            break
+        xml = xml + read
     return xml
 
 def read_pairs (r) :
     xml = read_input (r)
+    if (debug) :
+        print xml
     root = ET.fromstring("<PAIRS>" + xml + "</PAIRS>")
     pairs = []
     for index in range(0,len(root),2) :
@@ -20,52 +26,89 @@ def read_pairs (r) :
         pairs.append ({'xml': root[index], 'search': root[index+1]})
     return pairs
 
-def find_recurse (xml, search) :
-    if xml.tag == search.tag :
-#        print xml.tag
-        if len (search) == 0 :
-            return True
-        if len (search) > len (xml) :
-            return False
-        where = [-1]*len(search)
+def build_index (xml, xml_index, indices, search_root_tag) :
+    if (debug):
+        print str(xml_index) + '\t' + xml.tag
+    if xml.tag == search_root_tag :
+        indices[xml_index] = [xml]
+    for child in xml :
+        xml_index = build_index (child, xml_index+1, indices, search_root_tag)
+    return xml_index
 
-        """
-        for i in range (len(search)) :
-            for j in range (len(xml)) :
-                if xml[j].tag == search[i].tag :
-                    where[i] = j
+def find_recurse (search, indices) :
+    if (debug) :
+        print search.tag
+        if (verbose) :
+            print indices
+    for index in indices.keys() :
+        if (debug) :
+            print str(index) + '\t' + str(indices[index])
+        node = indices[index][-1]
+        if not search.tag == node.tag :
+            if (debug):
+                print '[F] Unequal'
+            del(indices[index])
+    
+    if len(search) == 0 :
+        if (debug) :
+            print 'Lowest level!'
+        return
+    if len(indices) == 0 :
+        if (debug) :
+            print 'All matches empty'
+        return
+
+    where = {}
+    for i in search :
+        where[i.tag] = {}
+        for index in indices.keys() :
+            node = indices[index][-1]
+            if len(search) > len(node) :
+                if (debug) :
+                    print '[F] Search longer at ' + str(index)
+                del(indices[index])
+                continue
+            for j in node :
+                if j.tag == i.tag :
+                    where[i.tag][index] = j
                     break
             else :
-                return False
-        """
-        for j in range (len(xml)) :
-            for i in range (len(search)) :
-                if where[i] == -1 and xml[j].tag == search[i].tag :
-                    where[i] = j
-                    break
-        if -1 in where :
-            return False
-         
-        
-        for i in range (len(search)) :
-            if not find_recurse (xml[where[i]], search[i]) :
-                return False;
-        return True
-    else :
-        return False
+                if (debug) :
+                    print '[F] %s not found at %d' % (i.tag, index)
+                del(indices[index])
 
-def find_matches (xml, search, xml_index, results) :
-#    print str(xml_index) + '\t' + xml.tag
-    if find_recurse (xml, search) :
-        results.append (str(xml_index) + '\n')
-    for index in range (len(xml)) :
-        xml_index = find_matches (xml[index], search, xml_index + 1, results)
-    return xml_index
+    if len(indices) == 0 :
+        if (debug) :
+            print 'All matches empty'
+        return
+
+    if debug and verbose:
+        print where
+    for i in search :
+        for index in indices.keys() :
+            indices[index].append (where[i.tag][index])
+        find_recurse (i, indices)
+        for index in indices.keys() :
+            indices[index].pop()         
 
 def find_in_pair (pair, out) :
     results = []
-    find_matches (pair['xml'], pair['search'], 1, results)
-    out.append (str(len(results)) + '\n')
+    indices = {}
+    xml = pair['xml']
+    search = pair['search']
+    build_index (xml, 1, indices, search.tag)
+    if debug:
+        print
+    find_recurse (search, indices)
+    if debug:
+        print
+    keys = indices.keys()
+    keys.sort()
+    results.append(str(len(indices)) + '\n')
+    for i in keys :
+        if debug:
+            print str(i) + '\t' + str(indices[i])
+        results.append (str(i) + '\n')
     out.extend (results)
 
 def find_in_pairs (pairs, out) :
