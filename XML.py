@@ -25,6 +25,8 @@ def find_recurse (xml, search) :
 #        print xml.tag
         if len (search) == 0 :
             return True
+        if len (search) > len (xml) :
+            return False
         where = [-1]*len(search)
 
         """
