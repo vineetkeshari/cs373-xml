@@ -1,6 +1,5 @@
 #!/lusr/bin/python
 
-from sys import stdin, stdout
 from xml.etree import ElementTree as ET
 
 def read_input (r) :
@@ -10,11 +9,6 @@ def read_input (r) :
         xml = xml + read
         read = r.readline()
     return xml
-
-def read_pair (r) :
-    xml = read_input (r)
-    root = ET.fromstring("<PAIR>" + xml + "</PAIR>")
-    return {'xml': root[0], 'search': root[1]}
 
 def read_pairs (r) :
     xml = read_input (r)
@@ -29,27 +23,32 @@ def read_pairs (r) :
 def find_recurse (xml, search) :
     if xml.tag == search.tag :
 #        print xml.tag
+        if len (search) == 0 :
+            return True
+        where = [-1]*len(search)
+
+        """
         for i in range (len(search)) :
             for j in range (len(xml)) :
-                if find_recurse (xml[j], search[i]) :
+                if xml[j].tag == search[i].tag :
+                    where[i] = j
                     break
             else :
                 return False
-        return True
         """
-        if len (search) == 0 :
-            return True
-        finds = [False]*len(search)
         for j in range (len(xml)) :
             for i in range (len(search)) :
-                if not finds[i] :
-                    finds[i] = find_recurse (xml[j], search[i])
-            if not False in finds :
-                break
-        else :
+                if where[i] == -1 and xml[j].tag == search[i].tag :
+                    where[i] = j
+                    break
+        if -1 in where :
             return False
+         
+        
+        for i in range (len(search)) :
+            if not find_recurse (xml[where[i]], search[i]) :
+                return False;
         return True
-        """
     else :
         return False
 
@@ -69,19 +68,12 @@ def find_in_pair (pair, out) :
 
 def find_in_pairs (pairs, out) :
     for pair in pairs :
-        out.extend (find_in_pair (pair, out))
+        find_in_pair (pair, out)
         out.append('\n')
+    out.pop()
 
 def xml_find (r, w) :
-    pair = read_pair (r)
-    result = []
-    find_in_pair (pair, result)
-    w.writelines (result)
-
-def xml_find_multiple (r, w) :
     pairs = read_pairs (r)
     result = []
     find_in_pairs (pairs, result)
     w.writelines (result)
-
-xml_find (stdin, stdout)
