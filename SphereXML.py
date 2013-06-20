@@ -34,6 +34,9 @@ def find_recurse (search, indices) :
         node = indices[index][-1]
         if not search.tag == node.tag :
             del(indices[index])
+            continue
+        if len(search) > len(node) :
+            del(indices[index])
     
     if len(search) == 0 :
         return

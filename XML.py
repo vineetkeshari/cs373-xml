@@ -48,11 +48,11 @@ def find_recurse (search, indices) :
             if (debug):
                 print '[F] Unequal'
             del(indices[index])
+            continue
         if len(search) > len(node) :
             if (debug) :
                 print '[F] Search node has more children at ' + str(index)
             del(indices[index])
-            continue
     
     if len(search) == 0 :
         if (debug) :
