@@ -14,18 +14,77 @@
 </THU>
 <Team><Cooly></Cooly></Team>
 
-<THU>
-	<Team>
-		<ACRush></ACRush>
-		<Jelly></Jelly>
-		<Cooly></Cooly>
-	</Team>
-	<JiaJia>
-		<Team>
-			<Ahyangyi></Ahyangyi>
-			<Dragon></Dragon>
-			<Cooly><Amber></Amber></Cooly>
-		</Team>
-	</JiaJia>
-</THU>
-<Team><Cooly></Cooly></Team>
+<ab>
+  <cd>
+    <ef></ef>
+    <gh></gh>
+    <cd>
+      <gh></gh>
+    </cd>
+    <ij>
+      <cd>
+        <gh>
+          <cd>
+            <gh></gh>
+          </cd>
+        </gh>
+      </cd>
+    </ij>
+  </cd>
+</ab>
+<cd><gh></gh></cd>
+
+<ab>
+  <cd>
+    <ef>
+      <kl></kl>
+      <gh></gh>
+    </ef>
+  </cd>
+  <gh>
+    <ij></ij>
+    <ef></ef>
+    <kl></kl>
+  </gh>
+  <ij>
+    <cd>
+      <ef>
+        <gh></gh>
+        <cd>
+          <ef>
+            <ij></ij>
+            <kl></kl>
+            <cd></cd>
+          </ef>
+        </cd>
+        <kl>
+          <gh></gh>
+          <cd></cd>
+        </kl>
+      </ef>
+      <cd>
+        <ef>
+          <kl>
+            <cd>
+              <ef>
+                <kl></kl>
+                <gh></gh>
+                <mn></mn>
+              </ef>
+            </cd>
+          </kl>
+          <gh>
+            <ef></ef>
+            <cd></cd>
+          </gh>
+        </ef>
+        <gh></gh>
+      </cd>
+    </cd>
+  </ij>
+  <ef>
+    <gh></gh>
+  </ef>
+</ab>
+<cd><ef><gh></gh><kl></kl></ef></cd>
+
