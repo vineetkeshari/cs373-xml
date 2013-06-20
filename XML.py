@@ -48,6 +48,11 @@ def find_recurse (search, indices) :
             if (debug):
                 print '[F] Unequal'
             del(indices[index])
+        if len(search) > len(node) :
+            if (debug) :
+                print '[F] Search node has more children at ' + str(index)
+            del(indices[index])
+            continue
     
     if len(search) == 0 :
         if (debug) :
@@ -55,38 +60,34 @@ def find_recurse (search, indices) :
         return
     if len(indices) == 0 :
         if (debug) :
-            print 'All matches empty'
+            print 'All search objects empty'
         return
 
     where = {}
-    for i in search :
-        where[i.tag] = {}
-        for index in indices.keys() :
-            node = indices[index][-1]
-            if len(search) > len(node) :
-                if (debug) :
-                    print '[F] Search longer at ' + str(index)
-                del(indices[index])
-                continue
-            for j in node :
-                if j.tag == i.tag :
-                    where[i.tag][index] = j
-                    break
-            else :
+    for index in indices.keys() :
+        where[index] = {}
+        node = indices[index][-1]
+        for i in search :
+            child = node.find (i.tag)
+            if child == None :
                 if (debug) :
                     print '[F] %s not found at %d' % (i.tag, index)
                 del(indices[index])
+                del(where[index])
+                break
+            else :
+                where[index][i.tag] = child
 
     if len(indices) == 0 :
         if (debug) :
-            print 'All matches empty'
+            print 'All search objects empty'
         return
 
     if debug and verbose:
         print where
     for i in search :
         for index in indices.keys() :
-            indices[index].append (where[i.tag][index])
+            indices[index].append (where[index][i.tag])
         find_recurse (i, indices)
         for index in indices.keys() :
             indices[index].pop()         

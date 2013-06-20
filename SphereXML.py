@@ -41,29 +41,27 @@ def find_recurse (search, indices) :
         return
 
     where = {}
-    for i in search :
-        where[i.tag] = {}
-        for index in indices.keys() :
-            node = indices[index][-1]
-            if len(search) > len(node) :
+    for index in indices.keys() :
+        where[index] = {}
+        node = indices[index][-1]
+        for i in search :
+            child = node.find (i.tag)
+            if child == None :
                 del(indices[index])
-                continue
-            for j in node :
-                if j.tag == i.tag :
-                    where[i.tag][index] = j
-                    break
+                del(where[index])
+                break
             else :
-                del(indices[index])
+                where[index][i.tag] = child
 
     if len(indices) == 0 :
         return
 
     for i in search :
         for index in indices.keys() :
-            indices[index].append (where[i.tag][index])
+            indices[index].append (where[index][i.tag])
         find_recurse (i, indices)
         for index in indices.keys() :
-            indices[index].pop()         
+            indices[index].pop()
 
 def find_in_pair (pair, out) :
     results = []
