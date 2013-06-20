@@ -1,0 +1,74 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module XML</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>XML</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/v/filer4b/v20q001/vkeshari/work/se/cs373-xml/XML.py">/v/filer4b/v20q001/vkeshari/work/se/cs373-xml/XML.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="xml.etree.ElementTree.html">xml.etree.ElementTree</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-build_index"><strong>build_index</strong></a>(xml, xml_index, indices, search_root_tag)</dt><dd><tt>Indexes&nbsp;all&nbsp;tags&nbsp;in&nbsp;XML&nbsp;and&nbsp;stores&nbsp;tags&nbsp;matching&nbsp;search&nbsp;XML&nbsp;root&nbsp;tag<br>
+&nbsp;<br>
+xml&nbsp;:&nbsp;Node&nbsp;in&nbsp;XML<br>
+xml_index&nbsp;:&nbsp;Index&nbsp;of&nbsp;node&nbsp;'xml'<br>
+&nbsp;&nbsp;Nodes&nbsp;are&nbsp;indexed&nbsp;in&nbsp;the&nbsp;order&nbsp;they&nbsp;appear&nbsp;in&nbsp;the&nbsp;XML<br>
+indices&nbsp;:&nbsp;Stores&nbsp;all&nbsp;possible&nbsp;matches&nbsp;to&nbsp;search&nbsp;XML&nbsp;(search&nbsp;object)<br>
+&nbsp;&nbsp;If&nbsp;the&nbsp;node's&nbsp;tag&nbsp;matches&nbsp;that&nbsp;of&nbsp;the&nbsp;search&nbsp;XML&nbsp;root,<br>
+&nbsp;&nbsp;it&nbsp;is&nbsp;a&nbsp;possible&nbsp;match&nbsp;to&nbsp;the&nbsp;search&nbsp;XML<br>
+search_root_tag&nbsp;:&nbsp;Tag&nbsp;of&nbsp;the&nbsp;root&nbsp;of&nbsp;the&nbsp;search&nbsp;XML</tt></dd></dl>
+ <dl><dt><a name="-find_in_pair"><strong>find_in_pair</strong></a>(pair, out)</dt><dd><tt>Finds&nbsp;all&nbsp;instances&nbsp;of&nbsp;'search'&nbsp;in&nbsp;'xml'&nbsp;for&nbsp;a&nbsp;pair&nbsp;of&nbsp;XMLs<br>
+&nbsp;<br>
+pair&nbsp;:&nbsp;Dict&nbsp;containing&nbsp;an&nbsp;XML&nbsp;and&nbsp;a&nbsp;search&nbsp;XML<br>
+out&nbsp;:&nbsp;List&nbsp;containing&nbsp;each&nbsp;line&nbsp;of&nbsp;the&nbsp;output&nbsp;for&nbsp;this&nbsp;pair</tt></dd></dl>
+ <dl><dt><a name="-find_in_pairs"><strong>find_in_pairs</strong></a>(pairs, out)</dt><dd><tt>Finds&nbsp;matches&nbsp;for&nbsp;all&nbsp;pairs&nbsp;of&nbsp;XML&nbsp;and&nbsp;search&nbsp;XML<br>
+&nbsp;<br>
+pairs&nbsp;:&nbsp;List&nbsp;containing&nbsp;all&nbsp;pairs<br>
+out&nbsp;:&nbsp;List&nbsp;of&nbsp;lines&nbsp;in&nbsp;output</tt></dd></dl>
+ <dl><dt><a name="-find_recurse"><strong>find_recurse</strong></a>(search, indices)</dt><dd><tt>Recurses&nbsp;through&nbsp;search&nbsp;XML,&nbsp;comparing&nbsp;each&nbsp;child&nbsp;with<br>
+the&nbsp;children&nbsp;of&nbsp;possible&nbsp;matches&nbsp;stored&nbsp;in&nbsp;indices<br>
+&nbsp;<br>
+search&nbsp;:&nbsp;Current&nbsp;node&nbsp;in&nbsp;the&nbsp;search&nbsp;XML<br>
+indices&nbsp;:&nbsp;Dict&nbsp;of&nbsp;all&nbsp;possible&nbsp;matches<br>
+&nbsp;&nbsp;All&nbsp;non-matching&nbsp;nodes&nbsp;in&nbsp;XML&nbsp;are&nbsp;removed&nbsp;from&nbsp;indices<br>
+&nbsp;&nbsp;if&nbsp;the&nbsp;children&nbsp;do&nbsp;not&nbsp;match&nbsp;at&nbsp;any&nbsp;step&nbsp;during&nbsp;recursion</tt></dd></dl>
+ <dl><dt><a name="-read_input"><strong>read_input</strong></a>(r)</dt><dd><tt>Reads&nbsp;a&nbsp;string&nbsp;from&nbsp;StringIO<br>
+&nbsp;<br>
+r&nbsp;:&nbsp;input&nbsp;StringIO&nbsp;object<br>
+xml&nbsp;:&nbsp;string&nbsp;read&nbsp;from&nbsp;r</tt></dd></dl>
+ <dl><dt><a name="-read_pairs"><strong>read_pairs</strong></a>(r)</dt><dd><tt>Parses&nbsp;all&nbsp;{XML,&nbsp;SearchXML}&nbsp;pairs&nbsp;from&nbsp;a&nbsp;string<br>
+&nbsp;<br>
+r&nbsp;:&nbsp;input&nbsp;string&nbsp;containing&nbsp;XMLs<br>
+pairs&nbsp;:&nbsp;List&nbsp;of&nbsp;{XML,&nbsp;SearchXML}&nbsp;pairs.<br>
+&nbsp;&nbsp;Each&nbsp;pair&nbsp;is&nbsp;a&nbsp;dict&nbsp;with&nbsp;keys&nbsp;'xml'&nbsp;and&nbsp;'search'</tt></dd></dl>
+ <dl><dt><a name="-xml_find"><strong>xml_find</strong></a>(r, w)</dt><dd><tt>Finds&nbsp;matches&nbsp;in&nbsp;the&nbsp;input&nbsp;stream&nbsp;and&nbsp;writes&nbsp;the&nbsp;results&nbsp;to&nbsp;output&nbsp;stream<br>
+&nbsp;<br>
+r&nbsp;:&nbsp;Input&nbsp;stream&nbsp;containing&nbsp;several&nbsp;XMLs<br>
+w&nbsp;:&nbsp;Output&nbsp;stream&nbsp;the&nbsp;result&nbsp;of&nbsp;all&nbsp;matches&nbsp;is&nbsp;written&nbsp;to</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>debug</strong> = False<br>
+<strong>verbose</strong> = False</td></tr></table>
+</body></html>
