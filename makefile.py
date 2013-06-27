@@ -35,4 +35,4 @@ RunXML.out: RunXML.in RunXML.py
 	RunXML.py < RunXML.in > RunXML.out
 
 TestXML.out: TestXML.py
-	TestXML.py > TestXML.out
+	TestXML.py > TestXML.out 2>> TestXML.out
