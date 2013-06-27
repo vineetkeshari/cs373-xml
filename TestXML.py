@@ -14,7 +14,6 @@ from XML import read_input, read_pairs, build_index, find_recurse, find_in_pair,
 # TestXML
 # -----------
 
-
 # ----------------
 # Test XML strings
 # ----------------
@@ -96,34 +95,34 @@ class TestXML (unittest.TestCase) :
 		b = read_pairs(r)
 		self.assert_(len(b) == 2)
 
-	# -----------
-	# build_index
-	# -----------
+    # -----------
+    # build_index
+    # -----------
 
     def test_index_1 (self) :
-		test_indices = {}
-		build_index(test_xml_1[0]['xml'], 1, test_indices, "ten")
-		self.assert_(test_indices == {})
+        test_indices = {}
+        build_index(test_xml_1[0]['xml'], 1, test_indices, "ten")
+        self.assert_(test_indices == {})
 		
     def test_index_2 (self):
-		test_indices = {}
-		build_index(test_xml_2[0]['xml'], 1, test_indices, "three")
-		self.assert_(test_indices.keys() == [3])
+        test_indices = {}
+        build_index(test_xml_2[0]['xml'], 1, test_indices, "three")
+        self.assert_(test_indices.keys() == [3])
 
     def test_index_3 (self):
-		test_indices = {}
-		build_index(test_xml_3[0]['xml'], 1, test_indices, "one")
-		self.assert_(test_indices.keys() == [8, 2, 5])
+        test_indices = {}
+        build_index(test_xml_3[0]['xml'], 1, test_indices, "one")
+        self.assert_(test_indices.keys() == [8, 2, 5])
 
-	# -----------
-	# find_recurse
+    # -----------
+    # find_recurse
     # ------------
     
     def test_find_recurse_1 (self):
-		test_indices = {}
-		build_index(test_xml_1[0]['xml'], 1, test_indices, "ten")
-		find_recurse(test_xml_1[0]['search'], test_indices)
-		self.assert_(test_indices == {})
+        test_indices = {}
+        build_index(test_xml_1[0]['xml'], 1, test_indices, "ten")
+        find_recurse(test_xml_1[0]['search'], test_indices)
+        self.assert_(test_indices == {})
 	
 		
     def test_find_recurse_2 (self):
@@ -143,9 +142,9 @@ class TestXML (unittest.TestCase) :
     # -----------
     
     def test_find_in_pair_1 (self):
-		results = []
-		find_in_pair(test_xml_1[0], results)
-		self.assert_(results == ['1\n', '2\n'])
+        results = []
+        find_in_pair(test_xml_1[0], results)
+        self.assert_(results == ['1\n', '2\n'])
 
     def test_find_in_pair_2 (self):
         results = []
@@ -157,14 +156,14 @@ class TestXML (unittest.TestCase) :
     	find_in_pair(test_xml_3[0], results)
     	self.assert_(results == ['2\n', '2\n', '8\n'])
     	    	
-	# -------------
+    # -------------
     # find_in_pairs
     # -------------
     
     def test_find_in_pairs_1 (self):
-		results = []
-		find_in_pairs(test_xml_1, results)
-		self.assert_(results == ['1\n', '2\n'])
+        results = []
+        find_in_pairs(test_xml_1, results)
+        self.assert_(results == ['1\n', '2\n'])
 
     def test_find_in_pairs_2 (self):
         results = []
@@ -185,7 +184,6 @@ class TestXML (unittest.TestCase) :
     	results = []
     	find_in_pairs(test_xml_5, results)
     	self.assert_(results == ['1\n', '2\n', '\n', '1\n', '3\n', '\n', '2\n', '2\n', '8\n'])
-    
     
     # -----------
     # xml_find
